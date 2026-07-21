@@ -48,16 +48,58 @@ const TAG_NAMES: Record<string, string> = {
   "63": "CRC",
 };
 
+const MAI_DEFAULT_TAG_NAMES: Record<string, string> = {
+  "00": "Globally Unique Identifier",
+  "01": "Global ID",
+  "02": "Merchant ID",
+  "03": "Merchant Criteria",
+};
+
+const MAI_TAG_26_NAMES: Record<string, string> = {
+  "00": "Globally Unique Identifier (Reversed Domain)",
+  "01": "Acquirer ID",
+  "02": "Merchant ID",
+  "03": "Merchant Criteria",
+};
+
+const MAI_TAG_51_NAMES: Record<string, string> = {
+  "00": "Globally Unique Identifier",
+  "01": "Global ID",
+  "02": "NMID (National Merchant ID)",
+  "03": "Merchant Criteria",
+};
+
+const ADDITIONAL_DATA_TAG_NAMES: Record<string, string> = {
+  "01": "Bill Number",
+  "02": "Mobile Number",
+  "03": "Store Label",
+  "04": "Loyalty Number",
+  "05": "Reference Label",
+  "06": "Customer Label",
+  "07": "Terminal ID",
+  "08": "Purpose of Transaction",
+  "09": "Additional Consumer Data Request",
+  "10": "Merchant Tax ID",
+  "11": "Merchant Channel",
+};
+
+const LANG_PREF_TAG_NAMES: Record<string, string> = {
+  "00": "Language Preference",
+  "01": "Merchant Name (Alt Language)",
+  "02": "Merchant City (Alt Language)",
+};
+
 /** Tags that contain nested TLV sub-elements */
 const NESTED_TAGS = new Set([
   ...Array.from({ length: 26 }, (_, i) => String(i + 26).padStart(2, "0")),
   "62",
+  "64",
 ]);
 
 /**
  * Parse a raw TLV string into an array of TLV elements.
  */
-export function parseTLV(data: string): TLV[] {
+export function parseTLV(data: string, parentTag?: string): TLV[] {
   const elements: TLV[] = [];
   let pos = 0;
 
@@ -70,12 +112,31 @@ export function parseTLV(data: string): TLV[] {
     if (isNaN(length) || pos + 4 + length > data.length) break;
 
     const value = data.substring(pos + 4, pos + 4 + length);
-    const name = TAG_NAMES[tag] ?? `Unknown (${tag})`;
+
+    let name = TAG_NAMES[tag] ?? `Unknown (${tag})`;
+    if (parentTag) {
+      const parentNum = parseInt(parentTag, 10);
+      if (parentNum >= 26 && parentNum <= 51) {
+        if (parentTag === "26") {
+          name = MAI_TAG_26_NAMES[tag] ?? `Unknown (${tag})`;
+        } else if (parentTag === "51") {
+          name = MAI_TAG_51_NAMES[tag] ?? `Unknown (${tag})`;
+        } else {
+          name = MAI_DEFAULT_TAG_NAMES[tag] ?? `Unknown (${tag})`;
+        }
+      } else if (parentTag === "62") {
+        name = ADDITIONAL_DATA_TAG_NAMES[tag] ?? `Unknown (${tag})`;
+      } else if (parentTag === "64") {
+        name = LANG_PREF_TAG_NAMES[tag] ?? `Unknown (${tag})`;
+      } else {
+        name = `Unknown (${tag})`;
+      }
+    }
 
     const element: TLV = { tag, name, length, value };
 
     if (NESTED_TAGS.has(tag)) {
-      element.children = parseTLV(value);
+      element.children = parseTLV(value, tag);
     }
 
     elements.push(element);
@@ -91,7 +152,7 @@ export function parseTLV(data: string): TLV[] {
 export function parseQRIS(qrisString: string): QRISData {
   const raw = parseTLV(qrisString);
 
-  const findTag = (tag: string) => raw.find((t) => t.tag === tag);
+  const findTag = (tag: string, elements: TLV[] = raw) => elements.find((t) => t.tag === tag);
 
   const methodValue = findTag("01")?.value;
   const method = methodValue === "12" ? "dynamic" : "static";
@@ -110,8 +171,7 @@ export function parseQRIS(qrisString: string): QRISData {
     })
     .map((t) => {
       const children = t.children ?? [];
-      const findChild = (childTag: string) =>
-        children.find((c) => c.tag === childTag);
+      const findChild = (childTag: string) => children.find((c) => c.tag === childTag);
 
       return {
         tag: t.tag,
@@ -122,10 +182,66 @@ export function parseQRIS(qrisString: string): QRISData {
       };
     });
 
+  // Extract ID domestic mapping (using the first 26-45 tag that exists)
+  const domesticTag = raw.find((t) => {
+    const num = parseInt(t.tag, 10);
+    return num >= 26 && num <= 45 && t.children;
+  });
+  
+  let merchantAccountInfoDomestic;
+  if (domesticTag && domesticTag.children) {
+    merchantAccountInfoDomestic = {
+      reverseDomain: findTag("00", domesticTag.children)?.value ?? "",
+      globalID: findTag("01", domesticTag.children)?.value ?? "",
+      id: findTag("02", domesticTag.children)?.value ?? "",
+      type: findTag("03", domesticTag.children)?.value ?? "",
+    };
+  }
+
+  const centralRepoTag = findTag("51");
+
+  // Extract Additional Data
+  const addDataTag = findTag("62");
+  let additionalData;
+  if (addDataTag && addDataTag.children) {
+    additionalData = {
+      billNumber: findTag("01", addDataTag.children)?.value,
+      mobileNumber: findTag("02", addDataTag.children)?.value,
+      storeLabel: findTag("03", addDataTag.children)?.value,
+      loyaltyNumber: findTag("04", addDataTag.children)?.value,
+      referenceLabel: findTag("05", addDataTag.children)?.value,
+      customerLabel: findTag("06", addDataTag.children)?.value,
+      terminalLabel: findTag("07", addDataTag.children)?.value,
+      purposeOfTransaction: findTag("08", addDataTag.children)?.value,
+      additionalConsumerDataRequest: findTag("09", addDataTag.children)?.value,
+      merchantTaxID: findTag("10", addDataTag.children)?.value,
+      merchantChannel: findTag("11", addDataTag.children)?.value,
+      paymentSystemSpecific: addDataTag.children.filter((t) => {
+        const num = parseInt(t.tag, 10);
+        return num >= 50 && num <= 99;
+      }),
+    };
+  }
+
+  // Extract Language Preference
+  const langTag = findTag("64");
+  let merchantInformationLanguage;
+  if (langTag && langTag.children) {
+    merchantInformationLanguage = {
+      languagePreference: findTag("00", langTag.children)?.value ?? "",
+      merchantNameAltLanguage: findTag("01", langTag.children)?.value ?? "",
+      merchantCityAltLanguage: findTag("02", langTag.children)?.value,
+    };
+  }
+
   return {
     version: findTag("00")?.value ?? "01",
     method,
+    
+    merchantAccountInfoDomestic,
+    merchantAccountInfoCentralRepository: centralRepoTag?.children ? findTag("02", centralRepoTag.children)?.value : centralRepoTag?.value,
     merchantAccountInfo,
+    
     merchantCategoryCode: findTag("52")?.value ?? "",
     currency: findTag("53")?.value ?? "360",
     amount: findTag("54")?.value,
@@ -136,7 +252,10 @@ export function parseQRIS(qrisString: string): QRISData {
     merchantName: findTag("59")?.value ?? "",
     merchantCity: findTag("60")?.value ?? "",
     postalCode: findTag("61")?.value ?? "",
-    additionalData: findTag("62")?.children,
+    
+    additionalData,
+    merchantInformationLanguage,
+    
     crc: findTag("63")?.value ?? "",
     raw,
   };

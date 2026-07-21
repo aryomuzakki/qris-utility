@@ -1,0 +1,514 @@
+{
+  "93600002": {
+    "name": "PT Bank Rakyat Indonesia (Persero), Tbk",
+    "product": "QRIS BRI"
+  },
+  "93600008": {
+    "name": "PT Bank Mandiri (Persero) Tbk.",
+    "product": "Livin' by Mandiri"
+  },
+  "93600009": {
+    "name": "PT Bank Negara Indonesia (Persero), Tbk",
+    "product": ""
+  },
+  "93600011": {
+    "name": "PT Bank Danamon Indonesia, Tbk",
+    "product": "QR Danamon"
+  },
+  "93600013": {
+    "name": "PT Bank Permata, Tbk",
+    "product": "PermataMobile X (Issuer), PeArtaJasa"
+  },
+  "93600014": {
+    "name": "PT Bank Central Asia, Tbk",
+    "product": "SakuKu, BCA mobile"
+  },
+  "93600016": {
+    "name": "PT Bank Maybank Indonesia, Tbk",
+    "product": "Maybank QR Pay"
+  },
+  "93600019": {
+    "name": "PT Bank Panin",
+    "product": "Bank Panin"
+  },
+  "93600022": {
+    "name": "PT Bank CIMB Niaga, Tbk",
+    "product": "Octo Mobile"
+  },
+  "93600023": {
+    "name": "PT Bank UOB Indonesia",
+    "product": "TMRW"
+  },
+  "93600028": {
+    "name": "PT Bank OCBC NISP, Tbk",
+    "product": "ONe Mobile"
+  },
+  "93600031": {
+    "name": "Citibank N.A., Indonesia",
+    "product": "Citibank N.A., Indonesia"
+  },
+  "93600036": {
+    "name": "PT. Bank China Construction Bank Indo",
+    "product": "PT. Bank China ConstructionRintis"
+  },
+  "93600037": {
+    "name": "PT Bank Artha Graha Internasional",
+    "product": "AGI Mobile, AGI Pay"
+  },
+  "93600046": {
+    "name": "PT Bank DBS Indonesia",
+    "product": "DBS MAX QRIS"
+  },
+  "93600054": {
+    "name": "PT Bank Capital Indonesia, Tbk",
+    "product": "Bank Capital Indonesia"
+  },
+  "93600076": {
+    "name": "PT Bank Bumi Arta, Tbk",
+    "product": "QR BBA Mobile"
+  },
+  "93600110": {
+    "name": "PT Bank Pembangunan Daerah Jawa Barat",
+    "product": "bjb DigiCash, bjb Mobile"
+  },
+  "93600111": {
+    "name": "PT Bank DKI",
+    "product": "JakOne Mobile"
+  },
+  "93600112": {
+    "name": "PT BPD Daerah Istimewa Yogyakarta",
+    "product": "BPDDIY QUAT (aplikasi merc"
+  },
+  "93600113": {
+    "name": "PT Bank Pembangunan Daerah Jawa Tengah",
+    "product": "Bank Jateng"
+  },
+  "93600114": {
+    "name": "PT Bank Pembangunan Daerah Provinsi",
+    "product": "Jatim Code (Fitur Bank Jatim"
+  },
+  "93600115": {
+    "name": "PT Bank Pembangunan Daerah Jambi",
+    "product": "QRIS Bank Jambi Mobile"
+  },
+  "93600116": {
+    "name": "PT Bank Aceh Syariah",
+    "product": "Action (Aceh Transaksi Onlin Jalin"
+  },
+  "93600118": {
+    "name": "PT Bank Pembangunan Daerah Sumatera Barat (Nagari)",
+    "product": "QRIS Nagari Mobile Banking"
+  },
+  "93600119": {
+    "name": "PT Bank Pembangunan Daerah Riau Kep",
+    "product": "BPD Riau Kepri"
+  },
+  "93600120": {
+    "name": "PT BPD SUMSELBABEL",
+    "product": "BPD Sumselbabel"
+  },
+  "93600121": {
+    "name": "PT Bank Pembangunan Daerah Lampung",
+    "product": "Bank Lampung"
+  },
+  "93600122": {
+    "name": "PT Bank Pembangunan Daerah Kalimantan Selatan",
+    "product": "Bank Kalsel"
+  },
+  "93600123": {
+    "name": "PT Bank Pembangunan Daerah Kalimant",
+    "product": "Bank Kalbar"
+  },
+  "93600124": {
+    "name": "PT. BPD Kaltimtara",
+    "product": "BPD Kaltimtara"
+  },
+  "93600126": {
+    "name": "PT BPD Sulawesi Selatan dan Sulawesi B",
+    "product": "Sulselbar Mobile"
+  },
+  "93600127": {
+    "name": "PT. Bank Sulawesi Utara dan Gorontalo",
+    "product": "Bank SulutGo"
+  },
+  "93600128": {
+    "name": "PT. Bank NTB Syariah",
+    "product": "Bank NTB Syariah"
+  },
+  "93600129": {
+    "name": "PT Bank Pembangunan Daerah Bali",
+    "product": "Qris bpd Bali (fitur bpd bali mArtaJasa"
+  },
+  "93600130": {
+    "name": "PT Bank Pembangunan Daerah Nusa Tenggara Timur",
+    "product": "NTT Pay"
+  },
+  "93600131": {
+    "name": "PT Bank PT BPD Maluku & Maluku Utara",
+    "product": ""
+  },
+  "93600132": {
+    "name": "PT Bank Pembangunan Daerah Papua",
+    "product": "Bank Papua"
+  },
+  "93600133": {
+    "name": "PT Bank Pembangunan Daerah Bengkulu",
+    "product": "PT BPD Bengkulu"
+  },
+  "93600135": {
+    "name": "PT Bank Pembangunan Daerah Sulawesi Tenggara",
+    "product": "Bank Sultra"
+  },
+  "93600147": {
+    "name": "PT Bank Muamalat Indonesia Tbk",
+    "product": "Muamalat QRIS"
+  },
+  "93600151": {
+    "name": "PT. Bank Mestika Dharma",
+    "product": "PT. Bank Mestika Dharma"
+  },
+  "93600152": {
+    "name": "PT Bank Shinhan Indonesia",
+    "product": "Bank Shinhan"
+  },
+  "93600153": {
+    "name": "PT Bank Sinarmas, Tbk",
+    "product": "SimobiPlus"
+  },
+  "93600157": {
+    "name": "PT. Bank Maspion Indonesia, Tbk",
+    "product": "Bank Maspion"
+  },
+  "93600161": {
+    "name": "PT Bank Ganesha Tbk",
+    "product": "Bank Ganesha"
+  },
+  "93600167": {
+    "name": "PT Bank QNB Indonesia, Tbk",
+    "product": "DooEt"
+  },
+  "93600200": {
+    "name": "PT Bank Tabungan Negara (Persero) Tbk",
+    "product": "BTN Mobile Banking"
+  },
+  "93600213": {
+    "name": "PT Bank Tabungan Pensiunan Nasional",
+    "product": "Jenius QR"
+  },
+  "93600422": {
+    "name": "PT. Bank BRISyariah, Tbk (sudah diganti",
+    "product": "BRISPay"
+  },
+  "93600425": {
+    "name": "PT. Bank Jabar Banten Syariah",
+    "product": "Bank Jabar Banten Syariah"
+  },
+  "93600426": {
+    "name": "PT Bank Mega, Tbk",
+    "product": "M-SMILE"
+  },
+  "93600441": {
+    "name": "PT Bank KB Bukopin",
+    "product": "Bank KB Bukopin"
+  },
+  "93600451": {
+    "name": "PT Bank Syariah Indonesia",
+    "product": "Qris bpd Bali (fitur bpd bali mArtaJasa"
+  },
+  "93600459": {
+    "name": "PT Krom Bank Indonesia Tbk",
+    "product": "Krom Bank"
+  },
+  "93600472": {
+    "name": "PT. Bank Jasa Jakarta",
+    "product": "PT. Bank Jasa Jakarta"
+  },
+  "93600484": {
+    "name": "PT Bank KEB Hana Indonesia",
+    "product": "MyHana Mobile Banking"
+  },
+  "93600485": {
+    "name": "PT Bank MNC Internasional Tbk",
+    "product": "Motion Banking"
+  },
+  "93600490": {
+    "name": "PT Bank Neo Commerce, Tbk",
+    "product": "Bank Neo"
+  },
+  "93600494": {
+    "name": "PT Bank Raya Indonesia Tbk",
+    "product": "Bank Raya"
+  },
+  "93600501": {
+    "name": "PT Bank Digital BCA",
+    "product": "Bank Digital BCA"
+  },
+  "93600503": {
+    "name": "PT Bank Nationalnobu, Tbk",
+    "product": "Nobu ePay"
+  },
+  "93600506": {
+    "name": "PT BANK Mega Syariah",
+    "product": "Bank Mega Syariah"
+  },
+  "93600513": {
+    "name": "Bank Ina Perdana",
+    "product": "Bank Ina Perdana"
+  },
+  "93600521": {
+    "name": "PT Bank KB Bukopin Syariah",
+    "product": "KB Bank Syariah"
+  },
+  "93600523": {
+    "name": "PT Bank Sahabat Sampoerna",
+    "product": "BSS Mobile (QRIS)"
+  },
+  "93600531": {
+    "name": "PT. Bank Amar Indonesia, Tbk",
+    "product": "PT. Bank Amar Indonesia"
+  },
+  "93600535": {
+    "name": "PT Bank Seabank Indonesia",
+    "product": "Seabank"
+  },
+  "93600536": {
+    "name": "PT Bank BCA Syariah",
+    "product": "Bank BCA Syariah"
+  },
+  "93600542": {
+    "name": "PT Bank Jago, Tbk",
+    "product": "Bank Jago"
+  },
+  "93600547": {
+    "name": "PT Bank BTPN Syariah Tbk",
+    "product": "Bank BTPN Syariah"
+  },
+  "93600548": {
+    "name": "Bank Multiarta Sentosa",
+    "product": ""
+  },
+  "93600553": {
+    "name": "PT Bank Mayora",
+    "product": ""
+  },
+  "93600555": {
+    "name": "PT Bank Index Selindo",
+    "product": "Bank Index"
+  },
+  "93600564": {
+    "name": "PT Bank Mandiri Taspen",
+    "product": "Movin' by Mandiri Taspen"
+  },
+  "93600566": {
+    "name": "PT Bank Victoria International, Tbk",
+    "product": ""
+  },
+  "93600567": {
+    "name": "PT. Allo Bank Indonesia, Tbk",
+    "product": ""
+  },
+  "93600689": {
+    "name": "PT BPRS Hijra Alami",
+    "product": "BPRS Hijra"
+  },
+  "93600777": {
+    "name": "PT Finnet Indonesia",
+    "product": "Finpay"
+  },
+  "93600789": {
+    "name": "PT Indosat, Tbk",
+    "product": "IMkas"
+  },
+  "93600808": {
+    "name": "PT Sprint Asia Technology",
+    "product": "Bayarind"
+  },
+  "93600811": {
+    "name": "PT Transaksi Artha Gemilang",
+    "product": "OttoCash"
+  },
+  "93600812": {
+    "name": "PT Solusi Pasti Indonesia",
+    "product": "Kaspro"
+  },
+  "93600813": {
+    "name": "PT GPay Digital Asia",
+    "product": "GAJA"
+  },
+  "93600814": {
+    "name": "PT. Netzme Kreasi Indonesia",
+    "product": "Netzme"
+  },
+  "93600815": {
+    "name": "PT Bimasakti Multi Sinergi",
+    "product": "SpeedCash"
+  },
+  "93600816": {
+    "name": "PT MNC Teknologi Nusantara",
+    "product": "MotionPay,SPIN"
+  },
+  "93600817": {
+    "name": "PT Yukk Kreasi Indonesia",
+    "product": "YUKKPay"
+  },
+  "93600818": {
+    "name": "PT Datacell Infomedia",
+    "product": "Paydia"
+  },
+  "93600820": {
+    "name": "PT Sarana Pactindo",
+    "product": "PAC Cash"
+  },
+  "93600821": {
+    "name": "PT. Midazpay Digital Indonesia",
+    "product": "Midazpay"
+  },
+  "93600822": {
+    "name": "PT Astra Digital Arta",
+    "product": "AstraPay"
+  },
+  "93600823": {
+    "name": "PT. Paprika Multi Media",
+    "product": "Paprika"
+  },
+  "93600824": {
+    "name": "PT Visi Jaya Indonesia",
+    "product": "Visi Jaya Indonesia"
+  },
+  "93600825": {
+    "name": "PT Max Interactives Technologies",
+    "product": "ZIPAY"
+  },
+  "93600826": {
+    "name": "PT Mareco Prima Mandiri",
+    "product": "Dipay"
+  },
+  "93600827": {
+    "name": "PT. Jatelindo Perkasa Abadi",
+    "product": "Fello"
+  },
+  "93600828": {
+    "name": "PT. Witami Tunai Mandiri",
+    "product": "TrueMoney"
+  },
+  "93600829": {
+    "name": "PT.  E2PAY GLOBAL UTAMA",
+    "product": "M-Bayar"
+  },
+  "93600830": {
+    "name": "PT. Akasanet Bumi Nusantara",
+    "product": "YODU"
+  },
+  "93600831": {
+    "name": "PT Inacash Lentera Teknologi",
+    "product": "Inacash"
+  },
+  "93600832": {
+    "name": "PT GDC Multi Sarana",
+    "product": "GDC Pay"
+  },
+  "93600833": {
+    "name": "PT. Prima Vista Solusi",
+    "product": "WIDE"
+  },
+  "93600834": {
+    "name": "PT Cakra Ultima Sejahtera",
+    "product": "DUWIT"
+  },
+  "93600835": {
+    "name": "PT Capital Net Indonesia",
+    "product": "Virgo"
+  },
+  "93600836": {
+    "name": "PT Nusapay Solusi Indonesia",
+    "product": "Nusapay"
+  },
+  "93600838": {
+    "name": "PT Duta Teknologi Kreatif",
+    "product": "Dutamoney"
+  },
+  "93600839": {
+    "name": "PT. CASHLEZ WORLDWIDE INDONESIA T",
+    "product": "Cashlez"
+  },
+  "93600842": {
+    "name": "PT Qoin Digital Indonesia",
+    "product": "Qoin"
+  },
+  "93600844": {
+    "name": "PT Indivara Sejahtera Sukses Makmur",
+    "product": "WOI"
+  },
+  "93600898": {
+    "name": "PT. Telkom Indonesia (Persero) Tbk",
+    "product": "t-money, QREN"
+  },
+  "93600899": {
+    "name": "PT Nusa Satu Inti Artha",
+    "product": "DokuPay"
+  },
+  "93600911": {
+    "name": "PT Fintek Karya Nusantara",
+    "product": "LinkAja"
+  },
+  "93600912": {
+    "name": "PT Visionet Internasional",
+    "product": "OVO"
+  },
+  "93600914": {
+    "name": "PT Dompet Anak Bangsa",
+    "product": "GoPay"
+  },
+  "93600915": {
+    "name": "PT. Espay Debit Indonesia Koe",
+    "product": "Dana"
+  },
+  "93600916": {
+    "name": "PT. Buana Media Teknologi",
+    "product": "GudangVoucher (GV e-moneArtaJasa"
+  },
+  "93600917": {
+    "name": "PT Veritra Sentosa Internasional",
+    "product": "Paytren"
+  },
+  "93600918": {
+    "name": "PT Airpay International Indonesia",
+    "product": "ShopeePay"
+  },
+  "93600919": {
+    "name": "PT Bluepay Digital International",
+    "product": "Bluepay Cash"
+  },
+  "93600920": {
+    "name": "PT Inti Dunia Sukses",
+    "product": "i.saku"
+  },
+  "93600921": {
+    "name": "PT. MITRA PEMBAYARAN ELEKTRONIK",
+    "product": "Saldomu"
+  },
+  "93600922": {
+    "name": "PT Ezeelink Indonesia",
+    "product": "Ezeelink"
+  },
+  "93600947": {
+    "name": "PT Bank Aladin Syariah",
+    "product": "Bank Aladin Syariah"
+  },
+  "93600950": {
+    "name": "PT Bank Commonwealth",
+    "product": ""
+  },
+  "93600998": {
+    "name": "PT Digital Solusi Pratama",
+    "product": "Digital Solusi Pratama"
+  },
+  "93600999": {
+    "name": "AHDI",
+    "product": ""
+  },
+  "93608161": {
+    "name": "PT Pos Indonesia",
+    "product": "Pospay"
+  }
+}

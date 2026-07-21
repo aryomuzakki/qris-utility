@@ -7,11 +7,46 @@ export interface TLV {
   children?: TLV[];
 }
 
+export interface MerchantAccountInformationID {
+  reverseDomain: string; // Tag 00
+  globalID: string;      // Tag 01
+  id: string;            // Tag 02
+  type: string;          // Tag 03
+}
+
+export interface AdditionalData {
+  billNumber?: string;                     // Tag 01
+  mobileNumber?: string;                   // Tag 02
+  storeLabel?: string;                     // Tag 03
+  loyaltyNumber?: string;                  // Tag 04
+  referenceLabel?: string;                 // Tag 05
+  customerLabel?: string;                  // Tag 06
+  terminalLabel?: string;                  // Tag 07
+  purposeOfTransaction?: string;           // Tag 08
+  additionalConsumerDataRequest?: string;  // Tag 09
+  merchantTaxID?: string;                  // Tag 10
+  merchantChannel?: string;                // Tag 11
+  paymentSystemSpecific?: TLV[];           // Tags 50-99
+  rfu?: TLV[];                             // Reserved for Future Use
+}
+
+export interface MerchantInformationLanguage {
+  languagePreference: string;             // Tag 00
+  merchantNameAltLanguage: string;        // Tag 01
+  merchantCityAltLanguage?: string;       // Tag 02
+  rfu?: TLV[];                            // Tags 03-99
+}
+
 /** Parsed QRIS data in a human-friendly structure */
 export interface QRISData {
   version: string;
   method: "static" | "dynamic";
-  merchantAccountInfo: MerchantAccountInfo[];
+  
+  // Secondary Structured Mappings
+  merchantAccountInfoDomestic?: MerchantAccountInformationID; // Tags 26-45
+  merchantAccountInfoCentralRepository?: string; // Tag 51 (NMID)
+  merchantAccountInfo?: MerchantAccountInfo[]; // Generic fallback
+  
   merchantCategoryCode: string;
   currency: string;
   amount?: string;
@@ -22,8 +57,13 @@ export interface QRISData {
   merchantName: string;
   merchantCity: string;
   postalCode: string;
-  additionalData?: TLV[];
+  
+  additionalData?: AdditionalData; // Tag 62 structured
+  merchantInformationLanguage?: MerchantInformationLanguage; // Tag 64
+  
   crc: string;
+  
+  // The raw TLV AST guarantees no data is lost
   raw: TLV[];
 }
 

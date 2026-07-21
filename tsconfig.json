@@ -19,7 +19,10 @@
     "paths": {
       "@core/*": ["./src/core/*"],
       "@web/*": ["./src/web/*"]
-    }
+    },
+    "ignoreDeprecations": "6.0",
+    "types": ["bun-types"]
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts", "src/**/__tests__/*"]
 }
