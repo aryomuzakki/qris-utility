@@ -3,14 +3,14 @@ export function Footer() {
     <footer className="border-t py-6 mt-auto">
       <div className="max-w-2xl mx-auto px-4 text-center text-sm text-gray-500 dark:text-gray-400 space-y-1">
         <p>
-          Made by{" "}
+          Made with <span className="text-red-500">❤️</span> by{" "}
           <a
-            href="https://github.com/verssache"
+            href="https://github.com/aryomuzakki"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary-600 dark:text-primary-400 hover:underline"
+            className="font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
           >
-            Gidhan
+            Aryo Muzakki
           </a>
         </p>
         <p className="text-xs text-gray-400 dark:text-gray-500">

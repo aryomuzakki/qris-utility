@@ -1,7 +1,7 @@
 {
   "name": "qris-utility",
-  "version": "2.0.0",
-  "description": "QRIS Static to Dynamic converter — parse, validate, and convert Indonesian QRIS payment codes",
+  "version": "0.1.0",
+  "description": "A comprehensive toolkit for Indonesian QRIS codes: parse, validate, dynamically inject amounts, and identify acquirers with lossless AST decoding.",
   "type": "module",
   "main": "./dist-core/index.cjs",
   "module": "./dist-core/index.js",
@@ -35,11 +35,11 @@
     "emvco",
     "gpn"
   ],
-  "author": "Gidhan",
+  "author": "aryomuzakki",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/verssache/qris-dinamis"
+    "url": "https://github.com/aryomuzakki/qris-utility.git"
   },
   "dependencies": {
     "jsqr": "^1.4.0",
