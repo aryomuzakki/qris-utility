@@ -23,9 +23,10 @@
     "build:core": "tsup",
     "build:web": "tsc -b && vite build",
     "build": "bun run build:core && bun run build:web",
-    "preview": "vite preview",
+    "preview": "bun run build:web && wrangler dev",
     "cli": "tsx src/cli.ts",
-    "test": "bun test"
+    "test": "bun test",
+    "deploy": "bun run build:web && wrangler deploy"
   },
   "keywords": [
     "qris",
@@ -48,6 +49,7 @@
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.45.1",
     "@types/qrcode": "^1.5.6",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -59,6 +61,7 @@
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "^6.0.2",
-    "vite": "^8.0.3"
+    "vite": "^8.0.3",
+    "wrangler": "^4.112.0"
   }
 }
