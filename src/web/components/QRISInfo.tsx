@@ -60,10 +60,7 @@ function ASTViewer({
             </span>
             <div className="flex-1">
               <div className="font-medium text-gray-700 dark:text-gray-300">
-                {el.name}{" "}
-                <span className="text-gray-400 font-normal">
-                  (len: {el.length})
-                </span>
+                {el.name} <span className="text-gray-400 font-normal">(len: {el.length})</span>
               </div>
               {(!el.children || el.children.length === 0) && (
                 <div className="mt-1 font-mono text-gray-600 dark:text-gray-400 break-all bg-gray-50 dark:bg-gray-800/50 p-1.5 rounded">
@@ -121,34 +118,22 @@ export function QRISInfo({ data }: Props) {
           <InfoRow label="Postal Code" value={data.postalCode} />
           <InfoRow label="Issuer" value={issuer} />
           {data.merchantAccountInfoDomestic?.globalID && (
-            <InfoRow
-              label="Acquirer ID"
-              value={data.merchantAccountInfoDomestic.globalID}
-            />
+            <InfoRow label="Acquirer ID" value={data.merchantAccountInfoDomestic.globalID} />
           )}
           <InfoRow label="NNS Code" value={nnsCode} />
           {nnsInfo && (
             <>
               <InfoRow label="Acquirer" value={`${nnsInfo.name} `} />
               {nnsInfo.product && (
-                <InfoRow
-                  label="Acquirer Product Name"
-                  value={`${nnsInfo.product}`}
-                />
+                <InfoRow label="Acquirer Product Name" value={`${nnsInfo.product}`} />
               )}
             </>
           )}
           {criteria && criteria !== "-" && (
-            <InfoRow
-              label="Criteria"
-              value={CRITERIA_MAP[criteria] ?? criteria}
-            />
+            <InfoRow label="Criteria" value={CRITERIA_MAP[criteria] ?? criteria} />
           )}
           {data.additionalData?.terminalLabel && (
-            <InfoRow
-              label="Terminal ID"
-              value={data.additionalData.terminalLabel}
-            />
+            <InfoRow label="Terminal ID" value={data.additionalData.terminalLabel} />
           )}
           <InfoRow
             label="Method"
@@ -166,19 +151,11 @@ export function QRISInfo({ data }: Props) {
           />
           <InfoRow
             label="Category"
-            value={
-              MCC_MAP[data.merchantCategoryCode] ?? data.merchantCategoryCode
-            }
+            value={MCC_MAP[data.merchantCategoryCode] ?? data.merchantCategoryCode}
           />
-          <InfoRow
-            label="Currency"
-            value={CURRENCY_MAP[data.currency] ?? data.currency}
-          />
+          <InfoRow label="Currency" value={CURRENCY_MAP[data.currency] ?? data.currency} />
           {data.amount && (
-            <InfoRow
-              label="Amount"
-              value={`Rp ${Number(data.amount).toLocaleString("id-ID")}`}
-            />
+            <InfoRow label="Amount" value={`Rp ${Number(data.amount).toLocaleString("id-ID")}`} />
           )}
         </div>
       </div>
@@ -202,7 +179,7 @@ export function QRISInfo({ data }: Props) {
             Raw TLV Tree
           </h2>
         </div>
-        <div className="p-4 max-h-96 overflow-y-auto">
+        <div className="p-4 max-h-[60dvh] xl:max-h-none overflow-y-auto">
           <ASTViewer elements={data.raw} />
         </div>
       </div>
@@ -213,9 +190,7 @@ export function QRISInfo({ data }: Props) {
 function InfoRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="px-4 py-2.5 flex items-center justify-between gap-4">
-      <span className="text-sm text-gray-500 dark:text-gray-400 shrink-0">
-        {label}
-      </span>
+      <span className="text-sm text-gray-500 dark:text-gray-400 shrink-0">{label}</span>
       <span className="text-sm font-medium text-right truncate">{value}</span>
     </div>
   );

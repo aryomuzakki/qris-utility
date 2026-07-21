@@ -77,7 +77,7 @@ export function QRISResult({ qrisString }: Props) {
 
         {/* QRIS String */}
         <div className="w-full">
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 break-all font-mono text-xs text-gray-600 dark:text-gray-400 max-h-24 overflow-y-auto">
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 break-all font-mono text-xs text-gray-600 dark:text-gray-400 max-h-32 overflow-y-auto">
             {qrisString}
           </div>
         </div>

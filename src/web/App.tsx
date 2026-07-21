@@ -31,6 +31,7 @@ export default function App() {
     try {
       const data = parseQRIS(value.trim());
       setParsed(data);
+      setResult(value.trim());
     } catch {
       setErrors(["Failed to parse QRIS data"]);
     }
@@ -47,7 +48,7 @@ export default function App() {
         setErrors(["Failed to convert QRIS"]);
       }
     },
-    [qrisString]
+    [qrisString],
   );
 
   const handleReset = useCallback(() => {
@@ -61,7 +62,7 @@ export default function App() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-8 space-y-6">
+      <main className="flex-1 w-full max-w-2xl xl:max-w-6xl mx-auto px-4 py-8 space-y-6">
         <QRISInput
           value={qrisString}
           onChange={handleQRISInput}
@@ -70,16 +71,19 @@ export default function App() {
         />
 
         {parsed && (
-          <>
-            <QRISInfo data={parsed} />
-            <ConvertForm
-              parsed={parsed}
-              onConvert={handleConvert}
-            />
-          </>
+          <div className="xl:grid xl:grid-cols-2 xl:gap-8 xl:items-start space-y-6 xl:space-y-0">
+            <div className="space-y-6">
+              <QRISInfo data={parsed} />
+            </div>
+
+            <div className="space-y-6">
+              <ConvertForm parsed={parsed} onConvert={handleConvert} />
+              {result && <QRISResult qrisString={result} />}
+            </div>
+          </div>
         )}
 
-        {result && <QRISResult qrisString={result} />}
+        {!parsed && result && <QRISResult qrisString={result} />}
       </main>
 
       <Footer />
