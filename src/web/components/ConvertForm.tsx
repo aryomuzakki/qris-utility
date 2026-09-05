@@ -4,17 +4,35 @@ import type { QRISData, ConvertOptions } from "@core/types";
 interface Props {
   parsed: QRISData;
   onConvert: (options: ConvertOptions) => void;
+  onConvertToStatic: () => void;
 }
 
+type Mode = "dynamic" | "static";
 type FeeType = "none" | "fixed" | "percentage";
 
-export function ConvertForm({ parsed, onConvert }: Props) {
+export function ConvertForm({ parsed, onConvert, onConvertToStatic }: Props) {
+  const isCurrentlyDynamic = parsed.method === "dynamic";
+  const [mode, setMode] = useState<Mode>("dynamic");
   const [amount, setAmount] = useState(parsed.amount ? String(parsed.amount) : "");
-  const [feeType, setFeeType] = useState<FeeType>("none");
-  const [feeValue, setFeeValue] = useState("");
+  const [feeType, setFeeType] = useState<FeeType>(
+    parsed.tipIndicator === "fixed"
+      ? "fixed"
+      : parsed.tipIndicator === "percentage"
+        ? "percentage"
+        : "none"
+  );
+  const [feeValue, setFeeValue] = useState(
+    parsed.tipFixed ?? parsed.tipPercentage ?? ""
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (mode === "static" && isCurrentlyDynamic) {
+      onConvertToStatic();
+      return;
+    }
+
     const amountNum = parseInt(amount, 10);
     if (isNaN(amountNum) || amountNum <= 0) return;
 
@@ -35,7 +53,7 @@ export function ConvertForm({ parsed, onConvert }: Props) {
       onSubmit={handleSubmit}
       className="rounded-xl border bg-white dark:bg-gray-900 overflow-hidden"
     >
-      <div className="px-4 py-3 border-b bg-gray-50 dark:bg-gray-900/50">
+      <div className="px-4 py-3 border-b bg-gray-50 dark:bg-gray-900/50 flex items-center justify-between">
         <h2 className="text-sm font-semibold flex items-center gap-2">
           <svg
             className="w-4 h-4 text-primary-500"
@@ -47,86 +65,134 @@ export function ConvertForm({ parsed, onConvert }: Props) {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"
+              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
             />
           </svg>
-          Convert to Dynamic
+          {isCurrentlyDynamic ? "Convert & Modify QRIS" : "Convert to Dynamic QRIS"}
         </h2>
+
+        {/* Mode Selector - only show if QRIS is dynamic and can be converted back to static */}
+        {isCurrentlyDynamic && (
+          <div className="flex bg-gray-200/80 dark:bg-gray-800 p-0.5 rounded-lg text-xs font-medium">
+            <button
+              type="button"
+              onClick={() => setMode("dynamic")}
+              className={`px-2.5 py-1 rounded-md transition-all ${
+                mode === "dynamic"
+                  ? "bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm"
+                  : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+              }`}
+            >
+              Dynamic
+            </button>
+            <button
+              type="button"
+              onClick={() => setMode("static")}
+              className={`px-2.5 py-1 rounded-md transition-all ${
+                mode === "static"
+                  ? "bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm"
+                  : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+              }`}
+            >
+              Static
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="p-4 space-y-4">
-        {/* Amount */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-            Amount (Rupiah)
-          </label>
-          <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">
-              Rp
-            </span>
-            <input
-              type="number"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="0"
-              min="1"
-              required
-              className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors"
-            />
-          </div>
-        </div>
-
-        {/* Service Fee */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-            Service Fee
-          </label>
-          <div className="flex gap-2">
-            {(["none", "fixed", "percentage"] as const).map((type) => (
-              <button
-                key={type}
-                type="button"
-                onClick={() => {
-                  setFeeType(type);
-                  setFeeValue("");
-                }}
-                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium border transition-colors ${
-                  feeType === type
-                    ? "border-primary-500 bg-primary-50 dark:bg-primary-950/30 text-primary-700 dark:text-primary-300"
-                    : "border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
-                }`}
-              >
-                {type === "none" ? "None" : type === "fixed" ? "Fixed (Rp)" : "Percent (%)"}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {feeType !== "none" && (
-          <div>
-            <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">
-                {feeType === "fixed" ? "Rp" : "%"}
-              </span>
-              <input
-                type="number"
-                value={feeValue}
-                onChange={(e) => setFeeValue(e.target.value)}
-                placeholder="0"
-                min="0"
-                step={feeType === "percentage" ? "0.1" : "1"}
-                className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors"
-              />
+        {mode === "dynamic" ? (
+          <>
+            {/* Amount */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Amount (Rupiah)
+              </label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">
+                  Rp
+                </span>
+                <input
+                  type="number"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  placeholder="0"
+                  min="1"
+                  required
+                  className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors"
+                />
+              </div>
             </div>
+
+            {/* Service Fee */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                Service Fee / Tip
+              </label>
+              <div className="flex gap-2">
+                {(["none", "fixed", "percentage"] as const).map((type) => (
+                  <button
+                    key={type}
+                    type="button"
+                    onClick={() => {
+                      setFeeType(type);
+                      setFeeValue("");
+                    }}
+                    className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium border transition-colors ${
+                      feeType === type
+                        ? "border-primary-500 bg-primary-50 dark:bg-primary-950/30 text-primary-700 dark:text-primary-300"
+                        : "border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800"
+                    }`}
+                  >
+                    {type === "none" ? "None" : type === "fixed" ? "Fixed (Rp)" : "Percent (%)"}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {feeType !== "none" && (
+              <div>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">
+                    {feeType === "fixed" ? "Rp" : "%"}
+                  </span>
+                  <input
+                    type="number"
+                    value={feeValue}
+                    onChange={(e) => setFeeValue(e.target.value)}
+                    placeholder="0"
+                    min="0"
+                    step={feeType === "percentage" ? "0.1" : "1"}
+                    className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-700 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-colors"
+                  />
+                </div>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              className="w-full py-2.5 px-4 rounded-lg bg-primary-600 hover:bg-primary-700 text-white font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/20"
+            >
+              Convert / Update Dynamic QRIS
+            </button>
+          </>
+        ) : (
+          <div className="space-y-4">
+            <div className="rounded-lg bg-gray-50 dark:bg-gray-800/60 p-3.5 text-xs text-gray-600 dark:text-gray-300 leading-relaxed border border-gray-200 dark:border-gray-700/60">
+              <p className="font-semibold text-gray-800 dark:text-gray-200 mb-1">
+                Static QRIS Mode
+              </p>
+              This will strip any fixed amount and service fee tags (Tags 54, 55, 56, 57) and set the initiation method to <strong>Static (11)</strong>. The customer manually inputs the amount in their mobile banking or e-wallet application.
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-2.5 px-4 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+            >
+              Convert to Static QRIS
+            </button>
           </div>
         )}
-
-        <button
-          type="submit"
-          className="w-full py-2.5 px-4 rounded-lg bg-primary-600 hover:bg-primary-700 text-white font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500/20"
-        >
-          Convert to Dynamic QRIS
-        </button>
       </div>
     </form>
   );

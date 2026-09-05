@@ -94,3 +94,39 @@ export function convertQRIS(
 
   return crcInput + crc;
 }
+
+/**
+ * Convert a dynamic (or static) QRIS string to a clean static QRIS.
+ *
+ * Steps:
+ * 1. Parse the TLV structure
+ * 2. Change Point of Initiation Method (tag 01) to "11" (static)
+ * 3. Strip Transaction Amount (tag 54)
+ * 4. Strip Tip Indicator (tag 55), Fixed Fee (tag 56), and Percentage Fee (tag 57)
+ * 5. Recalculate CRC16 checksum
+ */
+export function convertToStatic(qrisString: string): string {
+  const elements = parseTLV(qrisString);
+
+  // Tags to omit when converting to static
+  const dynamicTags = new Set(["54", "55", "56", "57", "63"]);
+
+  const result: TLV[] = [];
+
+  for (const el of elements) {
+    if (dynamicTags.has(el.tag)) continue;
+
+    if (el.tag === "01") {
+      result.push(makeTLV("01", "11", "Point of Initiation Method"));
+      continue;
+    }
+
+    result.push(el);
+  }
+
+  const withoutCRC = buildTLVString(result);
+  const crcInput = withoutCRC + "6304";
+  const crc = calculateCRC16(crcInput);
+
+  return crcInput + crc;
+}

@@ -1,43 +1,15 @@
 import type { QRISData } from "@core/types";
-import { getAcquirerInfo } from "@core/index";
+import {
+  getAcquirerInfo,
+  getMCCInfo,
+  getMerchantCriteriaInfo,
+  getCurrencyInfo,
+  getCountryInfo,
+} from "@core/index";
 
 interface Props {
   data: QRISData;
 }
-
-const CURRENCY_MAP: Record<string, string> = {
-  "360": "IDR (Rupiah)",
-  "840": "USD (Dollar)",
-};
-
-const MCC_MAP: Record<string, string> = {
-  "4111": "Transportation",
-  "4121": "Taxi",
-  "4814": "Telecommunication",
-  "5311": "Department Store",
-  "5411": "Grocery Store",
-  "5499": "Food Store",
-  "5812": "Restaurant / Eating Places",
-  "5814": "Fast Food",
-  "5912": "Pharmacy",
-  "5999": "Retail Store",
-  "7299": "Other Services",
-  "8011": "Medical",
-  "8999": "Professional Services",
-};
-
-const CRITERIA_MAP: Record<string, string> = {
-  UMI: "Usaha Mikro (UMI)",
-  UKE: "Usaha Kecil (UKE)",
-  UME: "Usaha Menengah (UME)",
-  UBE: "Usaha Besar (UBE)",
-  URE: "Usaha Regular (URE)",
-  SPBU: "Stasiun Pengisian Bahan Bakar Umum (SPBU)",
-  BLU: "Badan Layanan Umum (BLU)",
-  PSO: "Public Service Obligation (PSO)",
-  G2P: "Government to People (G2P)",
-  P2G: "People to Government (P2G)",
-};
 
 function ASTViewer({
   elements,
@@ -130,7 +102,10 @@ export function QRISInfo({ data }: Props) {
             </>
           )}
           {criteria && criteria !== "-" && (
-            <InfoRow label="Criteria" value={CRITERIA_MAP[criteria] ?? criteria} />
+            <InfoRow
+              label="Criteria"
+              value={getMerchantCriteriaInfo(criteria)?.nameId ?? criteria}
+            />
           )}
           {data.additionalData?.terminalLabel && (
             <InfoRow label="Terminal ID" value={data.additionalData.terminalLabel} />
@@ -149,13 +124,57 @@ export function QRISInfo({ data }: Props) {
               </span>
             }
           />
+          {data.merchantCategoryCode && (
+            <InfoRow
+              label="Category"
+              value={
+                (() => {
+                  const mcc = getMCCInfo(data.merchantCategoryCode);
+                  return mcc ? `${mcc.nameId} (${data.merchantCategoryCode})` : data.merchantCategoryCode;
+                })()
+              }
+            />
+          )}
+          {data.countryCode && (
+            <InfoRow
+              label="Country"
+              value={
+                (() => {
+                  const country = getCountryInfo(data.countryCode);
+                  return country ? `${country.name} (${country.scheme})` : data.countryCode;
+                })()
+              }
+            />
+          )}
           <InfoRow
-            label="Category"
-            value={MCC_MAP[data.merchantCategoryCode] ?? data.merchantCategoryCode}
+            label="Currency"
+            value={
+              (() => {
+                const cur = getCurrencyInfo(data.currency);
+                return cur ? `${cur.code} (${cur.name})` : data.currency;
+              })()
+            }
           />
-          <InfoRow label="Currency" value={CURRENCY_MAP[data.currency] ?? data.currency} />
           {data.amount && (
             <InfoRow label="Amount" value={`Rp ${Number(data.amount).toLocaleString("id-ID")}`} />
+          )}
+          {data.tipIndicator === "fixed" && data.tipFixed && (
+            <InfoRow
+              label="Fee / Tip (Fixed)"
+              value={`Rp ${Number(data.tipFixed).toLocaleString("id-ID")}`}
+            />
+          )}
+          {data.tipIndicator === "percentage" && data.tipPercentage && (
+            <InfoRow
+              label="Fee / Tip (Percentage)"
+              value={`${data.tipPercentage}%`}
+            />
+          )}
+          {data.tipIndicator === "prompt" && (
+            <InfoRow
+              label="Fee / Tip"
+              value="Customer Prompted"
+            />
           )}
         </div>
       </div>

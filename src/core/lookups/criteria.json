@@ -1,0 +1,62 @@
+{
+  "UMI": {
+    "name": "Micro Business",
+    "nameId": "Usaha Mikro (UMI)",
+    "description": "Usaha dengan kriteria mikro berdasarkan regulasi Bank Indonesia (MDR khusus)."
+  },
+  "UKE": {
+    "name": "Small Business",
+    "nameId": "Usaha Kecil (UKE)",
+    "description": "Usaha dengan kriteria kecil berdasarkan regulasi Bank Indonesia."
+  },
+  "UME": {
+    "name": "Medium Business",
+    "nameId": "Usaha Menengah (UME)",
+    "description": "Usaha dengan kriteria menengah berdasarkan regulasi Bank Indonesia."
+  },
+  "UBE": {
+    "name": "Large Business",
+    "nameId": "Usaha Besar (UBE)",
+    "description": "Usaha skala korporasi atau retail besar."
+  },
+  "URE": {
+    "name": "Regular Business",
+    "nameId": "Usaha Regular (URE)",
+    "description": "Usaha umum/regular yang tidak masuk kriteria khusus."
+  },
+  "SPBU": {
+    "name": "Gas / Fuel Station",
+    "nameId": "Stasiun Pengisian Bahan Bakar Umum (SPBU)",
+    "description": "Merchant penyedia bahan bakar kendaraan bermotor."
+  },
+  "BLU": {
+    "name": "Public Service Agency",
+    "nameId": "Badan Layanan Umum (BLU)",
+    "description": "Instansi pemerintah penyedia layanan publik."
+  },
+  "PSO": {
+    "name": "Public Service Obligation",
+    "nameId": "Public Service Obligation (PSO)",
+    "description": "Layanan kewajiban pelayanan publik pemerintah."
+  },
+  "G2P": {
+    "name": "Government to People",
+    "nameId": "Pemerintah ke Masyarakat (G2P)",
+    "description": "Penyaluran bantuan sosial atau program pemerintah."
+  },
+  "P2G": {
+    "name": "People to Government",
+    "nameId": "Masyarakat ke Pemerintah (P2G)",
+    "description": "Pembayaran pajak, retribusi daerah, tilang, paspor, dsb."
+  },
+  "DONASI": {
+    "name": "Donation / Non-Profit",
+    "nameId": "Donasi Sosial & Keagamaan (DONASI)",
+    "description": "Organisasi nirlaba, zakat, infak, sedekah, dan rumah ibadah (MDR 0%)."
+  },
+  "YAYASAN": {
+    "name": "Foundation / Social",
+    "nameId": "Yayasan Sosial (YAYASAN)",
+    "description": "Lembaga yayasan nirlaba sosial dan keagamaan."
+  }
+}

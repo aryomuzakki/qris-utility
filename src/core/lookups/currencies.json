@@ -1,0 +1,15 @@
+{
+  "360": { "code": "IDR", "name": "Indonesian Rupiah", "symbol": "Rp", "decimals": 2 },
+  "702": { "code": "SGD", "name": "Singapore Dollar", "symbol": "S$", "decimals": 2 },
+  "458": { "code": "MYR", "name": "Malaysian Ringgit", "symbol": "RM", "decimals": 2 },
+  "764": { "code": "THB", "name": "Thai Baht", "symbol": "฿", "decimals": 2 },
+  "392": { "code": "JPY", "name": "Japanese Yen", "symbol": "¥", "decimals": 0 },
+  "840": { "code": "USD", "name": "United States Dollar", "symbol": "$", "decimals": 2 },
+  "978": { "code": "EUR", "name": "Euro", "symbol": "€", "decimals": 2 },
+  "826": { "code": "GBP", "name": "British Pound", "symbol": "£", "decimals": 2 },
+  "036": { "code": "AUD", "name": "Australian Dollar", "symbol": "A$", "decimals": 2 },
+  "156": { "code": "CNY", "name": "Chinese Yuan", "symbol": "¥", "decimals": 2 },
+  "410": { "code": "KRW", "name": "South Korean Won", "symbol": "₩", "decimals": 0 },
+  "682": { "code": "SAR", "name": "Saudi Riyal", "symbol": "SR", "decimals": 2 },
+  "784": { "code": "AED", "name": "UAE Dirham", "symbol": "AED", "decimals": 2 }
+}

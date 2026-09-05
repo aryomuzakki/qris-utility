@@ -1,0 +1,9 @@
+{
+  "ID": { "name": "Indonesia", "alpha3": "IDN", "numeric": "360", "scheme": "QRIS" },
+  "SG": { "name": "Singapore", "alpha3": "SGP", "numeric": "702", "scheme": "NETS / SGQR" },
+  "MY": { "name": "Malaysia", "alpha3": "MYS", "numeric": "458", "scheme": "DuitNow QR" },
+  "TH": { "name": "Thailand", "alpha3": "THA", "numeric": "764", "scheme": "PromptPay" },
+  "JP": { "name": "Japan", "alpha3": "JPN", "numeric": "392", "scheme": "JPQR" },
+  "CN": { "name": "China", "alpha3": "CHN", "numeric": "156", "scheme": "UnionPay / Alipay / WeChat Pay" },
+  "US": { "name": "United States", "alpha3": "USA", "numeric": "840", "scheme": "EMVCo" }
+}

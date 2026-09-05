@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { parseQRIS, convertQRIS, validateQRIS } from "@core/index";
+import { parseQRIS, convertQRIS, convertToStatic, validateQRIS } from "@core/index";
 import type { QRISData, ConvertOptions } from "@core/types";
 import { Header } from "./components/Header";
 import { QRISInput } from "./components/QRISInput";
@@ -51,6 +51,17 @@ export default function App() {
     [qrisString],
   );
 
+  const handleConvertToStatic = useCallback(() => {
+    if (!qrisString.trim()) return;
+
+    try {
+      const staticQris = convertToStatic(qrisString.trim());
+      setResult(staticQris);
+    } catch {
+      setErrors(["Failed to convert QRIS to static"]);
+    }
+  }, [qrisString]);
+
   const handleReset = useCallback(() => {
     setQrisString("");
     setParsed(null);
@@ -77,7 +88,11 @@ export default function App() {
             </div>
 
             <div className="space-y-6">
-              <ConvertForm parsed={parsed} onConvert={handleConvert} />
+              <ConvertForm
+                parsed={parsed}
+                onConvert={handleConvert}
+                onConvertToStatic={handleConvertToStatic}
+              />
               {result && <QRISResult qrisString={result} />}
             </div>
           </div>
